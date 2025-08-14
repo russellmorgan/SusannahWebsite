@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" data-ws-project="adcaeeea-bd19-4da2-bdb5-cbea0837f64e"
+  data-ws-last-published="2025-08-14T16:42:02.684Z">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Susannah Edelbaum</title>
+  <link rel="preload" href="/assets/CrimsonText-Regular.ttf" as="font" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="text-neutral-800 bg-white">
+  <div class="flex flex-col container mx-auto md:flex-row md:space-x-32 px-4 py-12 font-[CrimsonText-Regular]">
+    <!-- side nav -->
+    <div>
+      <h1 class="text-xl pb-6 font-semibold">Susannah Edelbaum</h1>
+      <ul>
+        <li>
+          <a href="/">About Me</a>
+        </li>
+        <li>
+          <a href="/work">Writing</a>
+        </li>
+        <li>
+          <a href="/audio">Radio and Podcasts</a>
+        </li>
+        <li>
+          <a target="_self" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+    <!-- content column -->
+    <div>
+      <h1 class="text-xl pb-6 sm:pt-16 md:pt-0 font-semibold">Category title</h1>
+      <div id="content">
+        loading...
+      </div>
+    </div>
+  </div>
+  <script>
+    const SHEET_ID = "14KIRdlHu_CmnZCUg-ssRM18rD5dg2W0OJEHMIXKi2bs";
+    const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+
+    async function fetchSheetData() {
+      try {
+        const res = await fetch(SHEET_URL);
+        const text = await res.text();
+        const json = JSON.parse(text.substring(47, text.length - 2));
+
+        // First row = headers, skip it
+        const rows = json.table.rows.slice(1).map(r => r.c.map(c => (c ? c.v : "")));
+
+        // Map to objects
+        const works = rows.map(([title, url, category]) => ({ title, url, category }));
+
+        // Group by category
+        const grouped = works.reduce((acc, item) => {
+          if (!item.category) return acc;
+          acc[item.category] = acc[item.category] || [];
+          acc[item.category].push(item);
+          return acc;
+        }, {});
+
+        renderContent(grouped);
+      } catch (err) {
+        console.error(err);
+        document.getElementById("content").textContent = "Failed to load data.";
+      }
+    }
+
+    function renderContent(grouped) {
+      const container = document.getElementById("content");
+      container.innerHTML = "";
+      Object.keys(grouped).forEach(category => {
+        const section = document.createElement("section");
+        // Category header removed
+
+        const ul = document.createElement("ul");
+        ul.classList.add("space-y-1","pb-12");
+        grouped[category].forEach(item => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.classList.add("hover:underline");
+          a.href = item.url;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.textContent = item.title;
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+        section.appendChild(ul);
+        container.appendChild(section);
+      });
+    }
+
+    fetchSheetData();
+  </script>
+</body>
+
+</html>

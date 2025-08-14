@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Google Sheets Category Filter</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #categoryFilter { margin-bottom: 20px; padding: 5px; }
+    .project {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Projects</h1>
+
+  <label for="categoryFilter">Filter by Category:</label>
+  <select id="categoryFilter">
+    <option value="all">All</option>
+  </select>
+
+  <div id="projects"></div>
+
+  <script>
+    const sheetUrl = "https://docs.google.com/spreadsheets/d/e/14KIRdlHu_CmnZCUg-ssRM18rD5dg2W0OJEHMIXKi2bs/gviz/tq?tqx=out:json";
+    const projectsContainer = document.getElementById("projects");
+    const categoryFilter = document.getElementById("categoryFilter");
+    let allProjects = [];
+
+    fetch(sheetUrl)
+      .then(res => res.text())
+      .then(text => {
+        const json = JSON.parse(text.substr(47).slice(0, -2));
+        const rows = json.table.rows;
+
+        const categories = new Set();
+
+        rows.forEach(row => {
+          const title = row.c[0]?.v || "";
+          const description = row.c[1]?.v || "";
+          const category = (row.c[2]?.v || "").trim();
+
+          if (category) categories.add(category);
+
+          const projectEl = document.createElement("div");
+          projectEl.className = "project";
+          projectEl.dataset.category = category;
+          projectEl.innerHTML = `
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <small>Category: ${category}</small>
+          `;
+          projectsContainer.appendChild(projectEl);
+          allProjects.push(projectEl);
+        });
+
+        // Populate category dropdown
+        categories.forEach(cat => {
+          const opt = document.createElement("option");
+          opt.value = cat;
+          opt.textContent = cat;
+          categoryFilter.appendChild(opt);
+        });
+      });
+
+    categoryFilter.addEventListener("change", () => {
+      const selected = categoryFilter.value;
+      allProjects.forEach(project => {
+        if (selected === "all" || project.dataset.category === selected) {
+          project.classList.remove("hidden");
+        } else {
+          project.classList.add("hidden");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
