@@ -7,13 +7,20 @@
     <title>Susannah Edelbaum</title>
     <link rel="preload" href="CrimsonText-Regular.ttf" as="font" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+
+        html {
+            font-family: 'Crimson Text', serif;
+        }
+    </style>
 </head>
 
 <body class="text-neutral-800 bg-white">
-    <div class="flex flex-col container mx-auto md:flex-row md:space-x-32 px-4 py-12 font-[CrimsonText-Regular]">
+    <div class="flex flex-col container mx-auto md:flex-row md:space-x-32 px-4 py-12 crimson-text-regular">
         <!-- side nav -->
         <div>
-            <h1 class="text-xl pb-6 font-semibold">Susannah Edelbaum</h1>
+            <h1 class="text-xl pb-6 font-semibold crimson-text-bold">Susannah Edelbaum</h1>
             <ul>
                 <li>
                     <a href="index.html">About Me</a>
@@ -31,13 +38,12 @@
         </div>
         <!-- content column -->
         <div>
-            <h1 class="text-xl pb-6 sm:pt-16 md:pt-0 font-semibold">About Me</h1>
+            <h1 class="text-xl pb-6 sm:pt-16 md:pt-0 font-semibold crimson-text-bold">About Me</h1>
             <div id="content" class="max-w-prose">
                 Email contact:<br>
                 sj.edelbaum@gmail.com
             </div>
-            <img src="In_Italy.jpg" alt="Italy photo"
-                class="w-md h-auto rounded-lg mt-8" />
+            <img src="In_Italy.jpg" alt="Italy photo" class="w-md h-auto rounded-lg mt-8" />
         </div>
     </div>
 </body>

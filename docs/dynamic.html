@@ -7,13 +7,20 @@
   <title>Susannah Edelbaum</title>
   <link rel="preload" href="CrimsonText-Regular.ttf" as="font" crossorigin="anonymous" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+
+    html {
+      font-family: 'Crimson Text', serif;
+    }
+  </style>
 </head>
 
-<body class="text-neutral-800 bg-white">
-  <div class="flex flex-col container mx-auto md:flex-row md:space-x-32 px-4 py-12 font-[CrimsonText-Regular]">
+<body class="text-neutral-800 bg-white crimson-text-regular">
+  <div class="flex flex-col container mx-auto md:flex-row md:space-x-32 px-4 py-12 crimson-text-bold">
     <!-- side nav -->
     <div>
-      <h1 class="text-xl pb-6 font-semibold">Susannah Edelbaum</h1>
+      <h1 class="text-xl pb-6 crimson-text-bold font-semibold">Susannah Edelbaum</h1>
       <ul>
         <li>
           <a href="index.html">About Me</a>
@@ -31,7 +38,7 @@
     </div>
     <!-- content column -->
     <div>
-      <h1 class="text-xl pb-6 sm:pt-16 md:pt-0 font-semibold">Selected Work</h1>
+      <h1 class="text-xl pb-6 sm:pt-16 md:pt-0 crimson-text-bold font-semibold">Selected Work</h1>
       <div id="content">
         loading...
       </div>
@@ -79,7 +86,7 @@
 
         const categoryHeader = document.createElement("h2");
         categoryHeader.textContent = category;
-        categoryHeader.classList.add("text-lg", "font-semibold", "capitalize");
+        categoryHeader.classList.add("text-lg", "crimson-text-bold", "capitalize", "font-semibold");
         // To do, figure out category header new names
         section.appendChild(categoryHeader);
         const ul = document.createElement("ul");

@@ -2,91 +2,96 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Susannah Edelbaum</title>
-  <link rel="preload" href="CrimsonText-Regular.ttf" as="font" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Susannah Edelbaum</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+        html {
+            font-family: 'Crimson Text', serif;
+        }
+    </style>
 </head>
 
-<body class="text-neutral-800 bg-white">
-  <div class="flex flex-col container mx-auto md:flex-row md:space-x-32 px-4 py-12 font-[CrimsonText-Regular]">
-    <!-- side nav -->
-    <div>
-      <h1 class="text-xl pb-6 font-semibold">Susannah Edelbaum</h1>
-      <ul>
-        <li>
-          <a href="index.html">About Me</a>
-        </li>
-        <li>
-          <a href="dynamic.html">Writing</a>
-        </li>
-        <li>
-          <a href="audio.html">Radio and Podcasts</a>
-        </li>
-        <li>
-          <a href="contact.html">Contact</a>
-        </li>
-      </ul>
+<body class="text-neutral-800 bg-white crimson-text-regular">
+    <div class="flex flex-col container mx-auto md:flex-row md:space-x-32 px-4 py-12">
+        <!-- side nav -->
+        <div>
+            <h1 class="text-xl pb-6 font-semibold crimson-text-bold">Susannah Edelbaum</h1>
+            <ul>
+                <li>
+                    <a href="index.html">About Me</a>
+                </li>
+                <li>
+                    <a href="dynamic.html">Writing</a>
+                </li>
+                <li>
+                    <a href="audio.html">Radio and Podcasts</a>
+                </li>
+                <li>
+                    <a href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- content column -->
+        <div>
+            <h1 class="text-xl pb-6 sm:pt-16 md:pt-0 font-semibold crimson-text-bold">Radio and Podcasts</h1>
+            <div id="content">
+                loading...
+            </div>
+        </div>
     </div>
-    <!-- content column -->
-    <div>
-      <h1 class="text-xl pb-6 sm:pt-16 md:pt-0 font-semibold">Radio and Podcasts</h1>
-      <div id="content">
-        loading...
-      </div>
-    </div>
-  </div>
-  <script>
-    const SHEET_ID = "14KIRdlHu_CmnZCUg-ssRM18rD5dg2W0OJEHMIXKi2bs";
-    const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+    <script>
+        const SHEET_ID = "14KIRdlHu_CmnZCUg-ssRM18rD5dg2W0OJEHMIXKi2bs";
+        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-    async function fetchSheetData() {
-      try {
-        const res = await fetch(SHEET_URL);
-        const text = await res.text();
-        const json = JSON.parse(text.substring(47, text.length - 2));
+        async function fetchSheetData() {
+            try {
+                const res = await fetch(SHEET_URL);
+                const text = await res.text();
+                const json = JSON.parse(text.substring(47, text.length - 2));
 
-        // First row = headers, skip it
-        const rows = json.table.rows.slice(1).map(r => r.c.map(c => (c ? c.v : "")));
+                // First row = headers, skip it
+                const rows = json.table.rows.slice(1).map(r => r.c.map(c => (c ? c.v : "")));
 
-        // Map to objects
-        const works = rows
-          .map(([title, url, category]) => ({ title, url, category }))
-          .filter(item => item.category && item.category.toLowerCase() === "audio");
+                // Map to objects
+                const works = rows
+                    .map(([title, url, category]) => ({ title, url, category }))
+                    .filter(item => item.category && item.category.toLowerCase() === "audio");
 
-        // Group by category
-  // All items are now category 'audio', so just pass as array
-  renderContent(works);
-      } catch (err) {
-        console.error(err);
-        document.getElementById("content").textContent = "Failed to load data.";
-      }
-    }
+                // Group by category
+                // All items are now category 'audio', so just pass as array
+                renderContent(works);
+            } catch (err) {
+                console.error(err);
+                document.getElementById("content").textContent = "Failed to load data.";
+            }
+        }
 
-    function renderContent(grouped) {
-      const container = document.getElementById("content");
-      container.innerHTML = "";
-      const section = document.createElement("section");
-      const ul = document.createElement("ul");
-      ul.classList.add("space-y-1", "pb-12");
-      grouped.forEach(item => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.classList.add("hover:underline");
-        a.href = item.url;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.textContent = item.title;
-        li.appendChild(a);
-        ul.appendChild(li);
-      });
-      section.appendChild(ul);
-      container.appendChild(section);
-    }
+        function renderContent(grouped) {
+            const container = document.getElementById("content");
+            container.innerHTML = "";
+            const section = document.createElement("section");
+            const ul = document.createElement("ul");
+            ul.classList.add("space-y-1", "pb-12");
+            grouped.forEach(item => {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.classList.add("hover:underline");
+                a.href = item.url;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.textContent = item.title;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+            section.appendChild(ul);
+            container.appendChild(section);
+        }
 
-    fetchSheetData();
-  </script>
+        fetchSheetData();
+    </script>
 </body>
 
 </html>
