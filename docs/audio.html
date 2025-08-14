@@ -31,7 +31,7 @@
     </div>
     <!-- content column -->
     <div>
-      <h1 class="text-xl pb-6 sm:pt-16 md:pt-0 font-semibold">Selected Work</h1>
+      <h1 class="text-xl pb-6 sm:pt-16 md:pt-0 font-semibold">Radio and Podcasts</h1>
       <div id="content">
         loading...
       </div>
@@ -53,17 +53,11 @@
         // Map to objects
         const works = rows
           .map(([title, url, category]) => ({ title, url, category }))
-          .filter(item => item.category && item.category.toLowerCase() !== "audio");
+          .filter(item => item.category && item.category.toLowerCase() === "audio");
 
         // Group by category
-        const grouped = works.reduce((acc, item) => {
-          if (!item.category) return acc;
-          acc[item.category] = acc[item.category] || [];
-          acc[item.category].push(item);
-          return acc;
-        }, {});
-
-        renderContent(grouped);
+  // All items are now category 'audio', so just pass as array
+  renderContent(works);
       } catch (err) {
         console.error(err);
         document.getElementById("content").textContent = "Failed to load data.";
@@ -73,31 +67,22 @@
     function renderContent(grouped) {
       const container = document.getElementById("content");
       container.innerHTML = "";
-      Object.keys(grouped).forEach(category => {
-        const section = document.createElement("section");
-        // Category header removed
-
-        const categoryHeader = document.createElement("h2");
-        categoryHeader.textContent = category;
-        categoryHeader.classList.add("text-lg", "font-semibold", "capitalize");
-        // To do, figure out category header new names
-        section.appendChild(categoryHeader);
-        const ul = document.createElement("ul");
-        ul.classList.add("space-y-1", "pb-12");
-        grouped[category].forEach(item => {
-          const li = document.createElement("li");
-          const a = document.createElement("a");
-          a.classList.add("hover:underline");
-          a.href = item.url;
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
-          a.textContent = item.title;
-          li.appendChild(a);
-          ul.appendChild(li);
-        });
-        section.appendChild(ul);
-        container.appendChild(section);
+      const section = document.createElement("section");
+      const ul = document.createElement("ul");
+      ul.classList.add("space-y-1", "pb-12");
+      grouped.forEach(item => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.classList.add("hover:underline");
+        a.href = item.url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = item.title;
+        li.appendChild(a);
+        ul.appendChild(li);
       });
+      section.appendChild(ul);
+      container.appendChild(section);
     }
 
     fetchSheetData();
