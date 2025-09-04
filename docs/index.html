@@ -5,22 +5,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Susannah Edelbaum - About Me</title>
-    <link rel="preload" href="CrimsonText-Regular.ttf" as="font" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+        .crimson-text-regular {
+        font-family: "Crimson Text", serif;
+        font-weight: 400;
+        font-style: normal;
+        }
 
-        html {
-            font-family: 'Crimson Text', serif;
+        .crimson-text-semibold {
+        font-family: "Crimson Text", serif;
+        font-weight: 600;
+        font-style: normal;
+        }
+
+        .crimson-text-bold {
+        font-family: "Crimson Text", serif;
+        font-weight: 700;
+        font-style: normal;
+        }
+
+        .crimson-text-regular-italic {
+        font-family: "Crimson Text", serif;
+        font-weight: 400;
+        font-style: italic;
         }
     </style>
 </head>
 
 <body class="text-neutral-800 bg-white">
-    <div class="flex flex-col container mx-auto md:flex-row md:space-x-32 px-4 py-12 crimson-text-regular">
+    <div class="flex flex-col md:flex-row md:space-x-48 px-10 py-12 crimson-text-regular tracking-tight">
         <!-- side nav -->
         <div>
-            <h1 class="text-xl pb-6 font-semibold crimson-text-bold">Susannah Edelbaum</h1>
+            <h1 class="text-2xl pb-4 crimson-text-bold">Susannah Edelbaum</h1>
             <ul>
                 <li>
                     <a href="index.html">About Me</a>
@@ -38,7 +58,7 @@
         </div>
         <!-- content column -->
         <div>
-            <h1 class="text-xl pb-6 sm:pt-16 md:pt-0 font-semibold crimson-text-bold">About Me</h1>
+            <h1 class="text-2xl pb-6 sm:pt-16 md:pt-0 crimson-text-bold">About Me</h1>
             <div id="content" class="max-w-prose crimson-text-regular">
                 I’m a writer, editor, and occasional German-to-English translator in
                 Berlin, Germany. My work has been published on BBC, The Cut, Fast
