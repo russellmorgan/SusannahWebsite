@@ -5,46 +5,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Susannah Edelbaum - Writing</title>
-  <link rel="preload" href="CrimsonText-Regular.ttf" as="font" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <style>
+    <style>
     @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
-
-    html {
-      font-family: 'Crimson Text', serif;
-    } 
-    .crimson-text-regular {
-    font-family: "Crimson Text", serif;
-    font-weight: 400;
-    font-style: normal;
-    }
-
-    .crimson-text-semibold {
-    font-family: "Crimson Text", serif;
-    font-weight: 600;
-    font-style: normal;
-    }
-
-    .crimson-text-bold {
-    font-family: "Crimson Text", serif;
-    font-weight: 700;
-    font-style: normal;
-    }
-
-    .crimson-text-regular-italic {
-    font-family: "Crimson Text", serif;
-    font-weight: 400;
-    font-style: italic;
-    }
-
-  </style>
+    </style>
+    <link rel="stylesheet" href="main.css">
 </head>
 
 <body class="text-neutral-800 bg-white crimson-text-regular">
-  <div class="flex flex-col container mx-auto md:flex-row md:space-x-32 px-4 py-12 crimson-text-bold">
+  <div class="container">
     <!-- side nav -->
-    <div>
-      <h1 class="text-xl pb-6 crimson-text-bold font-semibold">Susannah Edelbaum</h1>
+    <div class="side-nav">
+      <h1 class="crimson-text-bold">Susannah Edelbaum</h1>
       <ul>
         <li>
           <a href="index.html">About Me</a>
@@ -61,8 +32,8 @@
       </ul>
     </div>
     <!-- content column -->
-    <div>
-      <h1 class="text-xl pb-6 sm:pt-16 md:pt-0 crimson-text-bold font-semibold">Selected Work</h1>
+    <div class="content-column">
+      <h2 class="crimson-text-bold">Selected Work</h2>
       <div id="content">
         loading...
       </div>
@@ -81,9 +52,10 @@
         // First row = headers, skip it
         const rows = json.table.rows.slice(1).map(r => r.c.map(c => (c ? c.v : "")));
 
+
         // Map to objects
         const works = rows
-          .map(([title, url, category]) => ({ title, url, category }))
+          .map(([title, url, category, publication]) => ({ title, url, category, publication }))
           .filter(item => item.category && item.category.toLowerCase() !== "audio");
 
         // Group by category
@@ -108,21 +80,26 @@
         const section = document.createElement("section");
         // Category header removed
 
-        const categoryHeader = document.createElement("h2");
+        const categoryHeader = document.createElement("h3");
         categoryHeader.textContent = category;
-        categoryHeader.classList.add("text-lg", "crimson-text-bold", "capitalize", "font-semibold");
+        categoryHeader.classList.add("crimson-text-semibold");
         // To do, figure out category header new names
         section.appendChild(categoryHeader);
         const ul = document.createElement("ul");
-        ul.classList.add("space-y-1", "pb-12");
+        ul.classList.add("crimson-text-regular");
         grouped[category].forEach(item => {
           const li = document.createElement("li");
           const a = document.createElement("a");
-          a.classList.add("hover:underline");
           a.href = item.url;
           a.target = "_blank";
           a.rel = "noopener noreferrer";
           a.textContent = item.title;
+          // Append publication if present
+          if (item.publication) {
+            const pubSpan = document.createElement("strong");
+            pubSpan.textContent = ` — ${item.publication}`;
+            a.appendChild(pubSpan);
+          }
           li.appendChild(a);
           ul.appendChild(li);
         });

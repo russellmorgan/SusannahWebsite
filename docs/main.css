@@ -1,0 +1,116 @@
+body {
+  font-family: 'Crimson Text', serif;
+  background-color: #fff;
+  color: #4a4a4a;
+  margin-top: 1rem;
+}
+
+a, a:visited {
+    color: #4a4a4a;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+h1,h2 {
+    font-size: 1.5rem;
+    padding-top:0;
+    margin-top:0;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.06rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+    padding:0;
+    margin:0;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.04rem;
+}
+
+strong {
+  font-family: "Crimson Text", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.container {
+  max-width: 100vw;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #fff;
+}
+
+.side-nav {
+  flex: 1 0 30%;
+}
+
+.content-column {
+  flex: 2 1 70%;
+}
+
+.content-column li {
+  margin-bottom: 0.2rem;
+}
+
+.content-column img {
+  height: auto;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  max-width: 640px;
+  width: 100%; 
+}
+
+/* desktop */
+@media (min-width: 768px) {
+  .container {
+    max-width: 90vw;
+    flex-direction: row;
+  }
+}
+
+/* Text styles */
+
+.crimson-text-regular {
+  font-family: "Crimson Text", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.crimson-text-semibold {
+  font-family: "Crimson Text", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.crimson-text-bold {
+  font-family: "Crimson Text", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.crimson-text-regular-italic {
+  font-family: "Crimson Text", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.crimson-text-semibold-italic {
+  font-family: "Crimson Text", serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.crimson-text-bold-italic {
+  font-family: "Crimson Text", serif;
+  font-weight: 700;
+  font-style: italic;
+}
