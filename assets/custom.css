@@ -3,12 +3,15 @@
    build artifact) so re-exporting from Webstudio never clobbers this file. */
 
 .site-footer {
-  width: 95%;
-  max-width: 95%;
-  margin: 0 auto;
-  padding: 20px 0 30px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 8px 12px;
   box-sizing: border-box;
-  text-align: right;
+  text-align: left;
+  z-index: 10;
+  white-space: normal;
 }
 
 .site-footer-link {
@@ -31,6 +34,7 @@
   padding-bottom: 40px;
   font-family: "Crimson Text", sans-serif;
   line-height: 1.4;
+  white-space: normal;
 }
 
 .privacy-content h2 {
