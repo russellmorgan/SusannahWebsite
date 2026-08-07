@@ -1,0 +1,78 @@
+/* Hand-authored additions layered on top of the Webstudio export.
+   Kept separate from assets/static/app_generated_index-*.css (an immutable
+   build artifact) so re-exporting from Webstudio never clobbers this file. */
+
+.site-footer {
+  width: 95%;
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 20px 0 30px;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.site-footer-link {
+  font-family: "Crimson Text", sans-serif;
+  font-size: 0.9em;
+  color: #4a4a4a;
+  text-decoration: none;
+}
+
+.site-footer-link:hover {
+  color: #000;
+}
+
+/* Privacy policy page body copy */
+.privacy-content {
+  width: 95%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  font-family: "Crimson Text", sans-serif;
+  line-height: 1.4;
+}
+
+.privacy-content h2 {
+  font-size: 1.4em;
+  font-weight: 700;
+  margin: 1.6em 0 0.4em;
+}
+
+.privacy-content h2:first-child {
+  margin-top: 0;
+}
+
+.privacy-content .privacy-date {
+  margin: 0 0 1.4em;
+  font-style: italic;
+}
+
+.privacy-content h3 {
+  font-size: 1.1em;
+  font-weight: 700;
+  margin: 1.2em 0 0.3em;
+}
+
+.privacy-content p {
+  margin: 0 0 0.8em;
+}
+
+.privacy-content ul {
+  margin: 0 0 0.8em;
+  padding-left: 1.4em;
+}
+
+.privacy-content li {
+  margin: 0 0 0.4em;
+}
+
+.privacy-content a {
+  color: #1a1a1a;
+}
+
+.privacy-content hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 2.4em 0;
+}
