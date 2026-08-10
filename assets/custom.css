@@ -21,6 +21,13 @@
   text-decoration: none;
 }
 
+.site-footer-sep {
+  font-family: "Crimson Text", sans-serif;
+  font-size: 0.9em;
+  color: #4a4a4a;
+  margin: 0 6px;
+}
+
 .site-footer-link:hover {
   color: #000;
 }

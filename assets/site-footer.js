@@ -7,11 +7,22 @@
     if (document.querySelector(".site-footer")) return;
     var footer = document.createElement("footer");
     footer.className = "site-footer";
-    var link = document.createElement("a");
-    link.href = "/privacy-policy";
-    link.className = "site-footer-link";
-    link.textContent = "Privacy Policy";
-    footer.appendChild(link);
+    [
+      ["/privacy-policy", "Privacy Policy"],
+      ["/impressum", "Impressum"],
+    ].forEach(function (entry, i) {
+      if (i > 0) {
+        var sep = document.createElement("span");
+        sep.className = "site-footer-sep";
+        sep.textContent = "/";
+        footer.appendChild(sep);
+      }
+      var link = document.createElement("a");
+      link.href = entry[0];
+      link.className = "site-footer-link";
+      link.textContent = entry[1];
+      footer.appendChild(link);
+    });
     document.body.appendChild(footer);
   }
 
